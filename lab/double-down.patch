@@ -1,0 +1,16 @@
+diff --git a/main.py b/main.py
+index 605a29e..fbc260b 100644
+--- a/main.py
++++ b/main.py
+@@ -47,7 +47,10 @@ def play_round(deck, balance):
+                 if p.is_bust():
+                     break
+             elif choice == "d":
+-                print("Double down is coming soon!")
++                # double the bet and take one more card
++                bet = bet * 2
++                p.add(deck.deal())
++                show_table(p, d)
+             else:
+                 break
+ 
