@@ -116,12 +116,11 @@ Bonus: ask the squad to review **the whole project**, not just the diff, and fix
 
 ## 5. Score your squad
 
-The `answers` branch has the full bug list and a test suite that only passes when
-the bugs are fixed:
+When you're done, ask your instructor for `test_answer_key.py`. It's a test suite
+that only passes when the bugs are fixed. Save it into the `tests/` folder, then run:
 
 ```
-git checkout answers -- tests/test_answer_key.py
 python -m unittest -v
 ```
 
-Count how many tests pass. No peeking at `ANSWER_KEY.md` until the end!
+Count how many tests pass. The instructor will share the full bug list at the end.
