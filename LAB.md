@@ -8,15 +8,40 @@ that finds and fixes them.
 > Note: `README.md` is **wrong on purpose** (that's the docs-writer's job).
 > Use this file for the real instructions.
 
-## 1. Setup (2 min)
+## Purpose: what you'll learn
 
-You need Python 3.8+ and git. Nothing to `pip install`.
+No coding experience needed. By the end you will have:
+
+1. Built **three Claude Code subagents** (reviewer, test-writer, docs-writer), each a small markdown file that gives Claude a focused job.
+2. Run them **in parallel** as a team on a real code change.
+3. Used them to **find and fix** about 30 planted bugs, then scored the result.
+
+The point isn't Blackjack. It's learning how to split work across specialized agents.
+You don't need to read the Python yourself. Let your agents do that.
+
+## 1. Setup (5 min)
+
+You need three things installed: **git**, **Python 3.8+** and **Claude Code**.
+Check them by typing these into a terminal (Terminal on Mac, PowerShell or WSL on Windows):
 
 ```
-git clone <this-repo-url>
+git --version
+python3 --version        # Windows: python --version
+claude --version
+```
+
+If one says "command not found", install it first. For Claude Code, follow
+https://docs.claude.com/en/docs/claude-code. Nothing to `pip install`.
+
+Then download the project and start the game:
+
+```
+git clone https://github.com/UncurledGuide/buggy-blackjack.git
 cd buggy-blackjack
-python main.py          # Windows: python main.py  |  Mac/Linux: python3 main.py
+python3 main.py          # Windows: python main.py
 ```
+
+You should see a menu with `1` play, `2` high scores, `3` quit. Type `3` to leave.
 
 ## 2. Play it and spot bugs yourself (5 min)
 
@@ -50,10 +75,22 @@ Try these. Each one shows at least one bug:
 Also look for: things the dealer shows that it shouldn't, messages that don't match
 your balance, what happens at $0, and whether two new games deal the same cards.
 
+<details>
+<summary>Stuck? Hints (open one at a time)</summary>
+
+- **Hint 1:** Bugs come in four flavors: wrong rules, wrong payouts, crashes and security holes. Test one of each.
+- **Hint 2:** Security bugs hide in anything that takes **input from a user**: the bet and the player name.
+- **Hint 3:** Try typing odd things: a letter, a negative number, `0`, a huge number, a name with `/` or `..` in it.
+- **Hint 4:** Give your reviewer agent a ranking job ("most severe first") and tell it to cite file and line.
+- **Hint 5:** If your agent isn't being used, check the `description` line in its file. Claude picks agents based on it.
+
+</details>
+
 ## 3. Build your squad (10 min)
 
-Start Claude Code in this folder (`claude`) and create three project subagents in
-`.claude/agents/`:
+Start Claude Code in this folder (type `claude`). The easiest way to make an agent is to
+type `/agents`, choose **Create new agent**, and pick **Project**. Or just ask Claude to
+write the files for you. Create three project subagents in `.claude/agents/`:
 
 - **reviewer**: read-only (`Read, Grep, Glob`). Finds bugs, security risks and confusing code, ranked by severity.
 - **test-writer**: writes and runs tests (`python -m unittest`), then reports what passed and failed.

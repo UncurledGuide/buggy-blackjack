@@ -1,5 +1,8 @@
 # Blackjack
 
+> **Doing the workshop? Start with [LAB.md](LAB.md).** It has the real instructions.
+> The rest of this README is out of date on purpose. Fixing it is the docs-writer agent's job.
+
 A simple Blackjack game you play in your terminal.
 
 ## Requirements
